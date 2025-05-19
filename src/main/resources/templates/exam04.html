@@ -6,13 +6,22 @@
     <title>exam04</title>
   </head>
   <body>
-    <form action="exam04.html" th:action="@{/exam03/input}" method="post">
+    <h1>ユーザー登録</h1>
+    <form
+      action="exam04.html"
+      th:action="@{/exam04/post}"
+      th:object="${exam04Form}"
+      method="post"
+    >
+      <div th:errors="*{name}" style="color: red">エラー！</div>
       名前：
       <input type="text" name="name" /><br />
+      <div th:errors="*{age}" style="color: red">エラー！</div>
       年齢：
       <input type="text" name="age" /><br />
-      コメント：
-      <input type="text" name="comment" /><br />
+      <div th:errors="*{comment}" style="color: red">エラー！</div>
+      コメント：<br />
+      <textarea name="comment" cols="30" rows="10"></textarea><br />
       <button type="submit">登録</button>
     </form>
   </body>
