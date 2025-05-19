@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/exam02")
 public class Exam02Controller {
+    @Autowired
+    private HttpSession session;
+
     @GetMapping("")
     public String index(){
         return "exam02";
     }
-
-    @Autowired
-    private HttpSession session;
 
     @PostMapping("/add")
     public String add(Integer num1, Integer num2){
