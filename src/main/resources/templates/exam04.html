@@ -15,13 +15,19 @@
     >
       <div th:errors="*{name}" style="color: red">エラー！</div>
       名前：
-      <input type="text" name="name" /><br />
+      <input type="text" name="name" th:field="*{name}" /><br />
       <div th:errors="*{age}" style="color: red">エラー！</div>
       年齢：
-      <input type="text" name="age" /><br />
+      <input type="text" name="age" th:field="*{age}" /><br />
       <div th:errors="*{comment}" style="color: red">エラー！</div>
       コメント：<br />
-      <textarea name="comment" cols="30" rows="10"></textarea><br />
+      <textarea
+        name="comment"
+        cols="30"
+        rows="10"
+        th:field="*{comment}"
+      ></textarea
+      ><br />
       <button type="submit">登録</button>
     </form>
   </body>

@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.domain.User;
 import com.example.form.Exam04Form;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +18,8 @@ public class Exam04Controller {
 
 
     @GetMapping("")
-    public String index(Model model, Exam04Form form){
+    public String index(Exam04Form form){
+
         return "exam04";
     }
 
@@ -29,16 +31,19 @@ public class Exam04Controller {
             , Model model
     ){
         if(result.hasErrors()){
-            return index(model, form);
+            return index(form);
         }
 
         User user = new User();
-        user.setName(form.getName());
+        BeanUtils.copyProperties(form, user);
         user.setAge(form.getIntAge());
-        user.setComment(form.getComment());
 
-        model.addAttribute("user", user);
-        return "exam04-result";
+        redirectAttributes.addFlashAttribute("user", user);
+        return "redirect:/exam04/to-result";
     }
 
+    @GetMapping("/to-result")
+    public String toResult(){
+        return "exam04-result";
+    }
 }
