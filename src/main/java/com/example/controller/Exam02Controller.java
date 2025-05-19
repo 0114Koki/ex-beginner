@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +16,14 @@ public class Exam02Controller {
         return "exam02";
     }
 
+    @Autowired
+    private HttpSession session;
+
     @PostMapping("/add")
-    public String add(Integer num1, Integer num2, Model model){
-        model.addAttribute("num1", num1);
-        model.addAttribute("num2", num2);
-        model.addAttribute("result", num1+num2);
+    public String add(Integer num1, Integer num2){
+        session.setAttribute("num1", num1);
+        session.setAttribute("num2", num2);
+        session.setAttribute("result", num1+num2);
         return "exam02-result";
     }
     @GetMapping("/to-page2")
